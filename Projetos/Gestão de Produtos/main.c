@@ -496,7 +496,8 @@ int terminal(){
       break;
     }
     printf("======== GESTÃO DE RODUTOS =========");
-    printf("\nVersão 1.0.1");
+    printf("\nVersão 1.0.1\n");
+    printf("Feito por: Fredson Chaves\n");
     printf("\n\n\n");
     printf("[1] - Adicionar produto\n");
     printf("[2] - Buscar produto\n");
