@@ -1,6 +1,14 @@
-# Lista de algoritmos com estrutura de dados
+# Algoritmos de Estrutura de Dados
 
-Este repositório contem algumas estrutura de dados feito em C
+Este repositório conterá os principais algoritmos de estruturas de dados bem como suas aplicações feitos em C/C++, Python e Javascript
 
-[Algoritmos de esturutura de dados](https://github.com/fredsonchaves07/estruturas-dados/tree/master/Listas)  
-[Projetos com estrutura de dados](https://github.com/fredsonchaves07/estruturas-dados/tree/master/Projetos/Gest%C3%A3o%20de%20Produtos) 
+## Estruturas clássicas
+
+  Algoritmo | C/C++ | Python | Javascript
+:----------:|:-------:|:--------:|:-----------:
+Listas      | C/C++ | Python | Javascript
+Filas       | C/C++ | Python | Javascript
+Pilhas      | C/C++ | Python | Javascript
+Arvores     | C/C++ | Python | Javascript
+
+
