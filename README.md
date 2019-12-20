@@ -11,5 +11,5 @@ Filas       | C/C++ | Python | Javascript
 Pilhas      | C/C++ | Python | Javascript
 Arvores     | C/C++ | Python | Javascript
 
-## :open_hands: Contribuição
+## 🤝 Contribuição
 Contribua também com esse projeto abrindo uma issue :smile:
