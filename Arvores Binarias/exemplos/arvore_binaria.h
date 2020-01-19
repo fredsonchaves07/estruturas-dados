@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 #define fmt "%d\n"
 
-typedef struct dados Dados;
+typedef dados Dados;
 
 typedef struct arvore{
     struct arvore *esq;
@@ -19,13 +21,15 @@ Arvorebin arvore(Arvorebin esq, Dados dados, Arvorebin dir){
     return A;
 }
 
-void pecurso_ordem(Arvorebin A){
+Dados pecurso_ordem(Arvorebin A){
     if(A == NULL){
-        return;
+        Dados *dadosaux;
+        strcpy(dadosaux->nome, "");
+        return *dadosaux;
     }
 
     pecurso_ordem(A->esq);
-    printf(fmt, A->dados);
+    return A->dados;
     pecurso_ordem(A->dir);
 }
 
@@ -36,7 +40,7 @@ void pecurso_preordem(Arvorebin A){
 
     printf(fmt, A->dados);
     pecurso_preordem(A->esq);
-    pecurso_ordem(A->dir);
+    pecurso_preordem(A->dir);
 }
 
 void pecurso_posordem(Arvorebin A){
@@ -59,3 +63,40 @@ void destroi(Arvorebin *A){
     free(*A);
     *A = NULL;
 }
+
+int esquerda_vazia(Arvorebin A){
+    if(A->esq == NULL){
+        return 1;
+    }
+
+    return 0;
+}
+
+int direita_vazia(Arvorebin A){
+    if(A->dir == NULL){
+        return 1;
+    }
+
+    return 0;
+}
+
+void adiciona_esquerda(Arvorebin A, Arvorebin esquerda){
+    A->esq = esquerda;
+}
+
+void adiciona_direita(Arvorebin A, Arvorebin direita){
+    A->dir = direita;
+}
+
+/*
+Dados lista_arvore(Lista A){
+    if(A == NULL){
+        Dados dadosaux = {};
+        return dadosaux;
+    }
+
+    pecurso_ordem(A->esq);
+    return A->dados;
+    pecurso_ordem(A->dir);
+}
+*/
