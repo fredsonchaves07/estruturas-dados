@@ -18,9 +18,10 @@
     char cliente[100];
 } Pedido;
 
-typedef struct{
+
+struct dados{
     char nome[100];
-} dados;
+};
 
 //Importação da estrutura de arvore
 #include "arvore_binaria.h"
@@ -75,8 +76,12 @@ void cadastroPedido(){
   } else{
         printf("O cliente não tem desconto por indicação\n");
         printf("Valor a ser pago: %.2f\n\n", pedido.valor);
-        strcpy(indicacao.nome, pedido.cliente);
-        A = arvore(NULL, indicacao, NULL);
+        if(strcmp(indicacao.nome, "") == 0){
+          strcpy(indicacao.nome, pedido.cliente);
+          A = arvore(NULL, indicacao, NULL);
+        }else{
+          printf("não ok\n");
+        }
         terminal();
     }
 }
@@ -123,6 +128,7 @@ float calculaDesconto(float valor){
 
 //Menu principal da aplicação
 void terminal(){
+  A = arvore(NULL, indicacao, NULL);
   int comando;
 
   printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");

@@ -1,14 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-
 #define fmt "%d\n"
 
-typedef dados Dados;
+typedef struct dados Dados;
 
 typedef struct arvore{
     struct arvore *esq;
-    Dados dados;
+     Dados dados;
     struct arvore *dir;
 } *Arvorebin;
 
@@ -23,9 +22,9 @@ Arvorebin arvore(Arvorebin esq, Dados dados, Arvorebin dir){
 
 Dados pecurso_ordem(Arvorebin A){
     if(A == NULL){
-        Dados *dadosaux;
-        strcpy(dadosaux->nome, "");
-        return *dadosaux;
+        Dados dadosaux;
+        strcpy(dadosaux.nome, "");
+        return dadosaux;
     }
 
     pecurso_ordem(A->esq);
