@@ -3,7 +3,9 @@
 #include <string.h>
 #define fmt "%d\n"
 
+
 typedef struct dados Dados;
+
 
 typedef struct arvore{
     struct arvore *esq;

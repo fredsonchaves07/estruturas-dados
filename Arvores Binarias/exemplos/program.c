@@ -23,8 +23,11 @@ struct dados{
     char nome[100];
 };
 
+
 //Importação da estrutura de arvore
 #include "arvore_binaria.h"
+
+
 
 //Variaveis das estruturas
 Pedido pedido;
@@ -32,6 +35,13 @@ Dados  indicacao;
 
 //Variavel de arvore
 Arvorebin A;
+
+//Importação da estrutura de Lista
+#include "lista.h"
+
+//Criação da lista
+
+Lista listaarvore;
 
 // Declarações das Funções
 void limpar_tela();
@@ -76,12 +86,11 @@ void cadastroPedido(){
   } else{
         printf("O cliente não tem desconto por indicação\n");
         printf("Valor a ser pago: %.2f\n\n", pedido.valor);
-        if(strcmp(indicacao.nome, "") == 0){
-          strcpy(indicacao.nome, pedido.cliente);
-          A = arvore(NULL, indicacao, NULL);
-        }else{
-          printf("não ok\n");
-        }
+      
+        strcpy(indicacao.nome, pedido.cliente);
+        A = arvore(NULL, indicacao, NULL);
+
+        adiciona(&listaarvore, A);
         terminal();
     }
 }
@@ -90,29 +99,42 @@ void cadastroPedido(){
 void verificaIndicacao(Pedido pedido){
     char nome[100];
     Dados dadosaux;
+    Dados dadosadicionar;
+    Arvorebin arvoresaux;
 
     printf("Digite o nome da pessoa quem indicou: ");
     flush_in();
     scanf("%[^\n]s", nome);
+    strcpy(dadosaux.nome, nome);
 
-    if(strcmp(pecurso_ordem(A).nome, nome) == 0){
-        strcpy(dadosaux.nome, nome);
-        Arvorebin arvoreaux = arvore(NULL, dadosaux, NULL);
-        if(esquerda_vazia(A)){
-            adiciona_esquerda(A, arvoreaux);
-            printf("Como indicação o cliente ganhou 10%% de desconto\n");
-            printf("Valor a ser pago: %.2f\n\n", calculaDesconto(pedido.valor));
-            terminal();
-        } else if(direita_vazia(A)){
-            adiciona_direita(A, arvoreaux);
-            printf("Como indicação o cliente ganhou 10%% de desconto\n");
-            printf("Valor a ser pago: %.2f\n\n", calculaDesconto(pedido.valor));
-            terminal();
-        } else{
-            printf("Não é possível adicionar o desconto pois a indicação passou do limite\n");
-            printf("Valor a ser pago: %.2f\n\n", pedido.valor);
-            terminal();
-        }
+    if(verificaDados(listaarvore, dadosaux)){
+
+      arvoresaux = retornaArvore(listaarvore, dadosaux);
+      strcpy(dadosadicionar.nome, pedido.cliente);
+
+      A = arvore(NULL, dadosadicionar, NULL);
+
+      if(esquerda_vazia(arvoresaux)){
+        
+        adiciona(&listaarvore, A);
+        adiciona_esquerda(arvoresaux, A);
+        printf("Como indicação o cliente ganhou 10%% de desconto\n");
+        printf("Valor a ser pago: %.2f\n\n", calculaDesconto(pedido.valor));
+
+        terminal();
+      } else if(direita_vazia(arvoresaux)){
+        adiciona(&listaarvore, A);
+        adiciona_direita(arvoresaux, A);
+        printf("Como indicação o cliente ganhou 10%% de desconto\n");
+        printf("Valor a ser pago: %.2f\n\n", calculaDesconto(pedido.valor));
+
+        terminal();
+      } else{
+        printf("Não é possível adicionar o desconto pois a indicação passou do limite de 02 pessoas\n");
+        printf("Valor a ser pago: %.2f\n\n", pedido.valor);
+        adiciona(&listaarvore, A);
+        terminal();
+      }
     } else{
         printf("Indicação não encontrada\n");
         printf("Pedido deve ser cadastrado sem indicação\n\n");
@@ -125,10 +147,8 @@ float calculaDesconto(float valor){
     return valor - (valor * 0.1);
 }
 
-
 //Menu principal da aplicação
 void terminal(){
-  A = arvore(NULL, indicacao, NULL);
   int comando;
 
   printf("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n");
@@ -149,12 +169,17 @@ void terminal(){
     case 0:
       printf("Saindo do Programa\n");
       break;
+    case 2:
+      exibe(listaarvore);
+      terminal();
+      break;
     default:
     printf("Comando não localizado!\n");
   }
 }
 
 int main(){
+  A = arvore(NULL, indicacao, NULL);
   terminal();
   return  0;
 }
