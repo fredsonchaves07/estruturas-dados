@@ -3,51 +3,32 @@
 #include <string.h>
 
 typedef struct no{
-    Arvorebin dadosarvore;
-    struct no *prox;
+  Arvore dadosarvore;
+  struct no *prox;
 } *Lista;
 
-Lista no(Arvorebin a, Lista p){
-    Lista n = malloc(sizeof(struct no));
-    n->dadosarvore = a;
-    n->prox = p;
+Lista no(Arvore A, Lista L){
+  Lista p = malloc(sizeof(struct no));
+  p->dadosarvore = A;
+  p->prox = L;
 
-    return n;
+  return p;
 }
 
-void exibe(Lista L){
-    while(L != NULL){
-         printf("%s\n", L->dadosarvore->dados.nome);
-        L = L->prox;
-    }
+int tamanhoLista(Lista L){
+  if(L == NULL){
+    return 0;
+  }
+
+  return 1 + tamanhoLista(L->prox);
 }
 
-int tamanho(Lista L){
-    if(L == NULL){
-        return 0;
-    } 
+void adicionaLista(Lista *L, Arvore A){
+  while(*L != NULL && (*L)->dadosarvore < A){
+    L = &(*L)->prox;
+  }
 
-    return 1 + tamanho(L->prox);
-}
-
-int pertence(Lista L, Arvorebin x){
-    if(L == NULL){
-        return 0;
-    }
-
-    if(x == L->dadosarvore){
-        return 1;
-    }
-
-    return pertence(L->prox, x);
-}
-
-void adiciona(Lista *L, Arvorebin x){
-    while(*L != NULL && (*L)->dadosarvore < x){
-        L = &(*L)->prox;
-        
-    }
-    *L = no(x, *L);
+  *L = no(A, *L);
 }
 
 int verificaDados(Lista L, Dados dados){
@@ -62,7 +43,7 @@ int verificaDados(Lista L, Dados dados){
     return verificaDados(L->prox, dados);
 }
 
-Arvorebin retornaArvore(Lista L, Dados dados){
+Arvore retornaArvore(Lista L, Dados dados){
     if(L == NULL){
         return NULL;
     }
@@ -73,3 +54,24 @@ Arvorebin retornaArvore(Lista L, Dados dados){
 
     return retornaArvore(L->prox, dados);
 }
+
+int alteraLista(Lista L, Dados dados){
+    if(L == NULL){
+        return 0;
+    }
+
+    if(strcmp(dados.nome, L->dadosarvore->dados.nome) == 0){
+        L->dadosarvore->dados = dados;
+        return 1;
+    }
+
+    return alteraLista(L->prox, dados);
+}
+
+void exibeClientes(Lista L){
+    while(L != NULL){
+         printf("%s\n", L->dadosarvore->dados.nome);
+         L = L->prox;
+    }
+}
+
