@@ -29,4 +29,5 @@ int main(){
     pecurso_preordem(A1);
     printf("\nPecorrendo dados em Pós Ordem\n");
     pecurso_posordem(A1);
+
 }
