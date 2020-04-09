@@ -37,3 +37,32 @@ int cheiaf(Fila f){
 
     return 0;
 }
+
+void efileira(Dados dados, Fila f){
+    if(cheiaf(f)){
+        printf("Fila cheia. Não será possível adicionar\n");
+        abort();
+    }
+
+    f->dados[f->final] = dados;
+    f->final += 1;
+    f->total += 1;
+}
+
+Dados desenfileira(Fila f){
+    if(vaziaf(f)){
+        printf("Fila vazia\n");
+        abort();
+    }
+
+    Dados dados = f->dados[f->inicio];
+    f->inicio ++;
+    f->total --;
+    return dados;
+}
+
+void destroifila(Fila *f){
+    free((*f)->dados);
+    free(*f);
+    *f = NULL;
+}
