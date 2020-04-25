@@ -31,14 +31,14 @@ int vaziaf(Fila f){
 }
 
 int cheiaf(Fila f){
-    if(f->total = f->max){
+    if(f->total == f->max){
         return 1;
     }
 
     return 0;
 }
 
-void efileira(Dados dados, Fila f){
+void enfileira(Dados dados, Fila f){
     if(cheiaf(f)){
         printf("Fila cheia. Não será possível adicionar\n");
         abort();
