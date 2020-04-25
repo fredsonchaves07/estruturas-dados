@@ -38,7 +38,7 @@ int cheiaf(Fila f){
     return 0;
 }
 
-void efileira(Dados dados, Fila f){
+void enfileira(Dados dados, Fila f){
     if(cheiaf(f)){
         printf("Fila cheia. Não será possível adicionar\n");
         abort();
